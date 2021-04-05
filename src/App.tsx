@@ -3,12 +3,10 @@ import './App.css';
 import Box from '@material-ui/core/Box';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import { formatDiagnostic } from 'typescript';
 import { useSelector, useDispatch } from "react-redux";
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PhoneIcon from '@material-ui/icons/Phone'; 
 import MailIcon from '@material-ui/icons/Mail';
@@ -53,6 +51,23 @@ const Styles = makeStyles({
     color:"white",
     fontWeight:"bold",
     cursor:"pointer",
+  },
+  accordianDelete:{
+    backgroundColor:"#80808040",
+    borderRadius:"5px",
+     padding:"5px"
+    },
+  notes:{
+    width:"60%",
+    height:"150px",
+    border:"1px solid red",
+    borderRadius:"4px"
+  },
+ modal:{
+   backgroundColor:"white", 
+   width:"80%", 
+   marginLeft:"10%", 
+   marginTop:"5%"
   },
 });
 
@@ -269,14 +284,14 @@ function App() {
         style={{display:"flex"}}
       >
           <div>{iter.branch}</div>
-          <div style={{marginLeft:"auto"}}><span id={pos.toString()} onClick={(e:any)=>{deleteObj(e.target.id)}} style={{backgroundColor:"#80808040", borderRadius:"5px", padding:"5px"}}><DeleteIcon style={{fontSize:"15px"}} /> Delete</span></div>
+          <div style={{marginLeft:"auto"}}><span id={pos.toString()} onClick={(e:any)=>{deleteObj(e.target.id)}} className={classes.accordianDelete}><DeleteIcon style={{fontSize:"15px"}} /> Delete</span></div>
       </AccordionSummary>
       <AccordionDetails>
         {flag ?
        <Box p={2}>
          <div style={{display:"flex"}}>
            <div>Contact Person : </div>
-           <div>{iter.contactPerson}</div>
+           <div style={{marginLeft:"15px"}}>{iter.contactPerson}</div>
          </div>
          <br />
          <div style={{display: iter.doorNo ==='' ? "none":"block"}}>
@@ -290,12 +305,12 @@ function App() {
          <br />
          {iter.phone && <div style={{display:"flex"}}>
            <div><PhoneIcon /> </div>
-           <div>{iter.phone}</div>
+           <div style={{marginLeft:"15px"}}>{iter.phone}</div>
          </div>}
          <br />
-         {iter.mail && <div style={{display:"flex"}}>
+         {iter.email && <div style={{display:"flex"}}>
            <div><MailIcon /> </div>
-           <div>{iter.mail}</div>
+           <div style={{marginLeft:"15px"}}>{iter.email}</div>
          </div>}
        </Box>
        :
@@ -400,9 +415,9 @@ function App() {
             variant="outlined"
             label=""
           >
-            <MenuItem value={0}>Tamil Nadu</MenuItem>
-            <MenuItem value={1}>Kerala</MenuItem>
-            <MenuItem value={2}>Andra</MenuItem>
+            <MenuItem value={1}>Tamil Nadu</MenuItem>
+            <MenuItem value={2}>Kerala</MenuItem>
+            <MenuItem value={3}>Andra</MenuItem>
           </Select>
           </FormControl>
             </div>
@@ -434,9 +449,9 @@ function App() {
             variant="outlined"
             label=""
           >
-            <MenuItem value={0}>India</MenuItem>
-            <MenuItem value={1}>United States</MenuItem>
-            <MenuItem value={2}>Africa</MenuItem>
+            <MenuItem value={1}>India</MenuItem>
+            <MenuItem value={2}>United States</MenuItem>
+            <MenuItem value={3}>Africa</MenuItem>
           </Select>
           </FormControl>
             </div>
@@ -461,17 +476,18 @@ function App() {
 <Box p={2}>
   <div style={{fontWeight:"bold"}}>Basic Detail <span className={classes.edit} onClick={()=>{
          openModal();
+         setValue(0);
        }}>Edit</span></div>
   <br />
-  <div>Name :</div>
-  <div>{form.basic.name}</div>
+  <div>Name</div>
+  <div style={{fontWeight:"bold"}}>{form.basic.name}</div>
   <br />
   <br />
-  <div>Website :</div>
-  <div>{form.basic.website}</div>
+  <div>Website</div>
+  <div style={{fontWeight:"bold"}}>{form.basic.website}</div>
   <br />
   <br />
-  <Box p={2} id="stringtoHtml" style={{width:"60%", height:"150px", border:"1px solid red", borderRadius:"4px"}}>
+  <Box p={2} id="stringtoHtml" className={classes.notes}>
     {form.notes == '' ? "Notes (Displays at your Dashboard)" : htmlFun(form.notes)}
   </Box>
   <br />
@@ -486,7 +502,7 @@ function App() {
 </Box>
      </Box>
      <Modal
-  style={{backgroundColor:"white", width:"80%", marginLeft:"10%", marginTop:"5%"}}
+  className={classes.modal}
   open={open}
   onClose={handleClose}
   aria-labelledby="simple-modal-title"
@@ -559,9 +575,9 @@ function App() {
           variant="outlined"
           label=""
         >
-          <MenuItem value={0}>IT Service</MenuItem>
-          <MenuItem value={1}>Sales</MenuItem>
-          <MenuItem value={2}>Marketing</MenuItem>
+          <MenuItem value={1}>IT Service</MenuItem>
+          <MenuItem value={2}>Sales</MenuItem>
+          <MenuItem value={3}>Marketing</MenuItem>
         </Select>
         </FormControl>
           </div>
@@ -580,9 +596,9 @@ function App() {
           variant="outlined"
           label=""
         >
-          <MenuItem value={0}>10-50</MenuItem>
-          <MenuItem value={1}>51-100</MenuItem>
-          <MenuItem value={2}>101-200</MenuItem>
+          <MenuItem value={1}>10-50</MenuItem>
+          <MenuItem value={2}>51-100</MenuItem>
+          <MenuItem value={3}>101-200</MenuItem>
         </Select>
         </FormControl>
           </div>

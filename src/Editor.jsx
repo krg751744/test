@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-//import { CKEditor } from '@ckeditor/ckeditor5-react';
-// const CK = require('@ckeditor/ckeditor5-react/');
-// const Classic = require('@ckeditor/ckeditor5-build-classic');
-//import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 function Editor(props) {
  
   return (

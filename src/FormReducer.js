@@ -45,11 +45,9 @@ const initialState={
 }
  
 function reducer(state = initialState, action){
-  console.log("hai");
 switch (action.type) {
     case "FORM":
       state = {...state, ...action.payload};
-      console.log("state",state);
     return {...state};
     default:
       return {...state};
